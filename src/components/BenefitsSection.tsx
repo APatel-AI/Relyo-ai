@@ -5,22 +5,22 @@ export function BenefitsSection() {
     {
       icon: CheckCircle2,
       title: "Stay on top of every responsibility",
-      description: "Never miss a deadline, appointment, or important task again",
+      description: "Appointments, tasks, documents, dates—finally organized and easy to track.",
     },
     {
       icon: Users,
-      title: "Keep your family effortlessly in sync",
-      description: "Everyone knows what's happening and what needs to be done",
+      title: "All the little things, remembered for you",
+      description: "No more digging through texts, emails, or notebooks to recall what happened when.",
     },
     {
       icon: Brain,
-      title: "AI that remembers what you can't",
-      description: "Get intelligent reminders and insights about your schedule",
+      title: "AI that keeps you ahead",
+      description: "Smart reminders and insights so nothing slips through the cracks.",
     },
     {
       icon: Layout,
-      title: "Your life in a single organized space",
-      description: "One beautiful dashboard for everything that matters",
+      title: "A single place to track all your family responsibilities",
+      description: "Clean, calm, and built for people who carry the mental load.",
     },
   ];
 

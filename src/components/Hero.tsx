@@ -1,6 +1,49 @@
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+import openPeeps from "./assets/open_peeps.png";
+import { useState, FormEvent } from "react";
 
 export function Hero() {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setStatus("error");
+      setMessage("Please enter a valid email address");
+      return;
+    }
+
+    setStatus("loading");
+    setMessage("");
+
+    try {
+      const response = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setStatus("success");
+        setMessage("Thanks for joining! We'll be in touch soon.");
+        setEmail("");
+      } else {
+        setStatus("error");
+        setMessage(data.error || "Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      setStatus("error");
+      setMessage("Failed to submit. Please try again later.");
+    }
+  };
+
   return (
     <section className="px-6 py-20 md:py-32">
       <div className="max-w-5xl mx-auto">
@@ -15,22 +58,35 @@ export function Hero() {
         </div>
 
         {/* Email Input */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-20 mt-10">
+        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-4 mt-10">
           <input
             type="email"
             placeholder="Enter your email"
-            className="w-full sm:w-80 px-4 py-3 border border-[#E5E5E5] rounded-lg focus:outline-none focus:border-[#8E8E8E] transition-colors"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            disabled={status === "loading"}
+            className="w-full sm:w-80 px-4 py-3 border border-[#E5E5E5] rounded-lg focus:outline-none focus:border-[#8E8E8E] transition-colors disabled:opacity-50"
           />
-          <button className="w-full sm:w-auto px-6 py-3 bg-black text-white rounded-lg hover:bg-[#2C2C2C] transition-colors">
-            Join the Waitlist
+          <button
+            type="submit"
+            disabled={status === "loading"}
+            className="w-full sm:w-auto px-6 py-3 bg-black text-white rounded-lg hover:bg-[#2C2C2C] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {status === "loading" ? "Joining..." : "Join the Waitlist"}
           </button>
-        </div>
+        </form>
 
+        {/* Status Message */}
+        {message && (
+          <div className={`text-center mb-16 ${status === "success" ? "text-green-600" : "text-red-600"}`}>
+            {message}
+          </div>
+        )}
         {/* Hero Mockup */}
         <div className="mt-16 rounded-xl border border-[#E5E5E5] overflow-hidden shadow-sm">
           <ImageWithFallback
-            src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=1200&q=80"
-            alt="Relyo Dashboard"
+            src={openPeeps}
+            alt="Open Peeps - Relyo Hero"
             className="w-full h-auto"
           />
         </div>
