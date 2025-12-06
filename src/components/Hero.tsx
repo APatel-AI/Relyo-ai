@@ -177,19 +177,19 @@ export function Hero() {
               ))}
             </div>
             {/* Fade overlays */}
-            <div className="absolute top-0 left-0 bottom-0 w-32 pointer-events-none" style={{
-              background: 'linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%)'
+            <div className="absolute top-0 left-0 bottom-0 w-10 pointer-events-none" style={{
+              background: 'linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 90%)'
             }} />
-            <div className="absolute top-0 right-0 bottom-0 w-32 pointer-events-none" style={{
-              background: 'linear-gradient(to left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%)'
+            <div className="absolute top-0 right-0 bottom-0 w-10 pointer-events-none" style={{
+              background: 'linear-gradient(to left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 90%)'
             }} />
           </div>
         </div>
 
-        {/* Hero Mockup */}
+        {/* Hero Mockup
         <div className="mt-24 rounded-xl overflow-hidden shadow-sm">
           <ImageWithFallback src={openPeepsImage} alt="Relyo App Mockup" width={1200} height={800} />
-        </div>
+        </div> */}
       </div>
     </section>
   );
