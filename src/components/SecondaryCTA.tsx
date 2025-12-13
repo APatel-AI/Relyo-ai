@@ -37,6 +37,7 @@ export function SecondaryCTA() {
         setMessage(data.error || "Something went wrong. Please try again.");
       }
     } catch (error) {
+      console.error("Waitlist submission error:", error);
       setStatus("error");
       setMessage("Failed to submit. Please try again later.");
     }
