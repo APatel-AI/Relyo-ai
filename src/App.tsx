@@ -2,6 +2,7 @@ import { Hero } from "./components/Hero";
 // import { PricingSection } from "./components/PricingSection";
 import { BenefitsSection } from "./components/BenefitsSection";
 import { SecondaryCTA } from "./components/SecondaryCTA";
+import { Toaster } from "./components/ui/sonner";
 
 export default function App() {
   return (
@@ -10,6 +11,7 @@ export default function App() {
       {/* <PricingSection /> */}
       <BenefitsSection />
       <SecondaryCTA />
+      <Toaster />
     </div>
   );
 }
